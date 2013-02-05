@@ -2,10 +2,14 @@ body {
   margin: 5% 0;
 
   font-size: 20px;
+  line-height: 20px;
 
   background-color: #222;
   color: #ddd;
 }
+
+.add-top { margin-top: 40px; }
+.add-bottom { margin-bottom: 40px; }
 
 #card {
   margin: 0 auto 10% auto;
@@ -18,6 +22,7 @@ body {
 
   background-color: #fcfcfc;
   border: 1px solid #fcfcfc;
+  box-shadow: 1px 1px 50px black;
 
   cursor: default;
 
@@ -26,12 +31,27 @@ body {
 
     font-size: 6em;
     text-align: center;
-    color: black;
+    color: #333;
 
     .extra {
       margin-top: 200px;
 
       font-size: 1rem;
     }
+  }
+}
+
+#info {
+  text-align: center;
+  text-shadow: 1px 1px 2px black;
+  color: #555;
+
+  .data {
+    margin-top: 0.25em;
+    margin-bottom: 0.75em;
+
+    font-size: 3em;
+    line-height: 1em;
+    color: #ddd;
   }
 }
