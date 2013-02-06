@@ -4,10 +4,10 @@
 
 Check out ```nginx``` for proxy configuration.
 
-## Makes your life easier
+## The following makes your life easier
 
 ```npm install coffee supervisor -g```
 
 ```coffee -w -c app/server.coffee```
-```coffee -w -c web/coffee/client.coffee```
+```coffee -w -c -o web/js web/coffee/client.coffee```
 ```supervisor app/server.js```
