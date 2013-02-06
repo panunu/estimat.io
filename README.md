@@ -8,6 +8,10 @@ Check out ```nginx``` for proxy configuration.
 
 ```npm install coffee supervisor -g```
 
+Run these on project root.
+
 ```coffee -w -c app/server.coffee```
+
 ```coffee -w -c -o web/js web/coffee/client.coffee```
+
 ```supervisor app/server.js```
