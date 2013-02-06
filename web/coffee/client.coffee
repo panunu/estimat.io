@@ -1,14 +1,16 @@
-socket = io.connect('http://app.planning.tunk.io', { port: 3000 })
+$(document).ready ->
+  socket = io.connect('http://app.planning.tunk.io', { port: 3000 })
 
-socket.on 'participants', (count) ->
-  if $('#participants .icon-user').size() == count then return
-  $('#participants .icon-user').remove();
+  socket.on 'participants', (count) ->
+    if $('#participants .icon-user').size() == count then return
 
-  while count-- > 0
-    $('#participants').append('<i class="icon-user"></i> ').hide().fadeIn()
+    $('#participants .icon-user').remove();
 
-$('#card').on 'click', (e) ->
-  socket.emit 'ready', true
+    while count-- > 0
+      $('#participants').append('<i class="icon-user"></i> ').hide().fadeIn()
 
-socket.on 'ready', (ready) ->
-  if ready then alert 'READY'
+  $('#card').on 'click', ->
+    $(this).toggleClass('ready')
+    socket.emit 'ready', $(this).hasClass('ready')
+
+  socket.on 'ready', -> alert 'READY'

@@ -16,7 +16,9 @@ io.sockets.on 'connection', (socket) ->
   socket.on 'disconnect', (socket) ->
     io.sockets.emit('participants', --participants)
 
-  socket.on 'ready', (ok) ->
-    if (++ready == participants)
-      io.sockets.emit('ready', true)
+  socket.on 'ready', (isReady) ->
+    if isReady then ready++ else ready--
+
+    if ready == participants
+      io.sockets.emit 'ready'
       ready = 0
