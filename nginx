@@ -1,0 +1,18 @@
+upstream app.planning.tunk.io {
+    server 127.0.0.1:3000;
+}
+
+server {
+    server_name planning.tunk.io;
+
+    root /Users/Panu/Desktop/Projects/planning/web;
+
+    location / {
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header X-NginX-Proxy true;
+        proxy_pass http://app.planning.tunk.io/;
+        proxy_redirect off;
+    }
+}
