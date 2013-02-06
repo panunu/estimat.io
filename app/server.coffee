@@ -17,6 +17,7 @@ io.sockets.on 'connection', (socket) ->
     io.sockets.emit('participants', --participants)
 
   socket.on 'ready', (isReady) ->
+    if ready < 0 then ready = 0
     if isReady then ready++ else ready--
 
     if ready == participants
