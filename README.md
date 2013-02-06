@@ -1,3 +1,3 @@
 # Installation
 
-```npm install -g socket.io```
+```npm install -g socket.io express```
