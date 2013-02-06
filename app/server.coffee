@@ -5,7 +5,7 @@ io     = require('socket.io').listen(server)
 server.listen(3000)
 
 app.get '/', (request, response) ->
-  response.sendfile '../web/index.html'
+  response.sendfile __dirname + '/views/index.html'
 
   ###
 io.sockets.on('connection', function (socket) {
