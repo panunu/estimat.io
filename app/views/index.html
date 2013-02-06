@@ -9,6 +9,7 @@
     <link href="assets/less/planning.less" rel="stylesheet" type="text/less">
     <link href="//fonts.googleapis.com/css?family=Patua+One" rel="stylesheet" type="text/css">
 
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="assets/js/less-1.3.3.min.js"></script>
     <script src="assets/js/socket.io.min.js"></script>
 </head>
@@ -46,13 +47,7 @@
             <div class="row-fluid add-top">
                 <div class="span12">
                     Participants
-                    <div class="data">
-                        <i class="icon-user"></i>
-                        <i class="icon-user"></i>
-                        <i class="icon-user"></i>
-                        <i class="icon-user"></i>
-                        <i class="icon-user"></i>
-                    </div>
+                    <div id="participants" class="data"></div>
                 </div>
             </div>
         </div>
@@ -60,10 +55,28 @@
 </div>
 
 <script>
-    var socket = io.connect('http://app.planning.tunk.io:3000');
+    var socket = io.connect('http://app.planning.tunk.io', { port: 3000 });
 
-    socket.on('hello', function (data) {
-        console.log(data);
+    socket.on('participants', function(count) {
+        if ($('#participants .icon-user').size() == count) {
+            return;
+        }
+
+        $('#participants .icon-user').remove();
+
+        for (var i = 0; i < count; i++) {
+            $('#participants').append('<i class="icon-user"></i> ').hide().fadeIn();
+        }
+    });
+
+    $('#card').on('click', function(e) {
+        socket.emit('ready', true);
+    });
+
+    socket.on('ready', function(ready) {
+        if (ready) {
+            alert('READY YEAH');
+        }
     });
 </script>
 
