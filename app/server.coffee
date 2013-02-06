@@ -8,12 +8,6 @@ app.get '/', (request, response) ->
   response.sendfile __dirname + '/views/index.html'
 
 io.sockets.on 'connection', (socket) ->
-  socket.emit('lus', 'lussenhoff')
+  socket.emit('hello', 'lussenhoff')
 
-###
-io.sockets.on('connection', function (socket) {
-socket.emit('news', { hello: 'world' });
-  socket.on('my other event', function (data) {
-  console.log(data);
-});
-});###
+

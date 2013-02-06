@@ -61,6 +61,10 @@
 
 <script>
     var socket = io.connect('http://app.planning.tunk.io:3000');
+
+    socket.on('hello', function (data) {
+        console.log(data);
+    });
 </script>
 
 </body>
