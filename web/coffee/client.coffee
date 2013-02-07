@@ -9,7 +9,9 @@ $(document).ready ->
       $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
 
   $('#card').on 'click', ->
-    $(this).toggleClass('ready')
-    socket.emit 'ready', $(this).hasClass('ready')
+    if $(this).toggleClass('ready').hasClass('ready')
+      return socket.emit 'ready', $('.value', this).text()
 
-  socket.on 'ready', -> alert 'READY'
+    socket.emit 'cancel'
+
+  socket.on 'ready', (cards) -> alert cards
