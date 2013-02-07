@@ -7,19 +7,22 @@ server.listen(3000)
 app.get '/', (request, response) ->
   response.sendfile __dirname + '/views/index.html'
 
-participants = 0
-ready = 0
+people = []
+ready  = []
 
 io.sockets.on 'connection', (socket) ->
-  io.sockets.emit('participants', ++participants)
+  people.push socket.id
+  io.sockets.emit('people', people.length)
 
-  socket.on 'disconnect', (socket) ->
-    io.sockets.emit('participants', --participants)
+  socket.on 'disconnect', ->
+    people = people.filter (x) -> x != socket.id
+    ready = ready.filter (x) -> x != socket.id
+    io.sockets.emit('people', people.length)
 
   socket.on 'ready', (isReady) ->
-    if ready < 0 then ready = 0
-    if isReady then ready++ else ready--
+    if isReady then ready.push socket.id
+    else ready = ready.filter (x) -> x != socket.id
 
-    if ready == participants
+    if ready.length == people.length
       io.sockets.emit 'ready'
-      ready = 0
+      ready = []
