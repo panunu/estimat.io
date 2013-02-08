@@ -51,28 +51,28 @@ body {
 }
 
 #card-selection {
-  .card-small {
-    float: left;
-    border-radius: 6px;
-    background-color: #fcfcfc;
-
-    width: 65px;
-    height: 100px;
-    margin: 10px;
-
-    cursor: pointer;
-
-    .card-content {
-      font-size: 1em;
-    }
-
-    &.selected{
+  .card {
+    &.selected {
       background-color: #eeccbb;
     }
   }
 }
 
+.card {
+  float: left;
+  border-radius: 6px;
+  background-color: #fcfcfc;
 
+  width: 65px;
+  height: 100px;
+  margin: 10px;
+
+  cursor: pointer;
+
+  .card-content {
+    font-size: 1em;
+  }
+}
 
 #results {
   .results {

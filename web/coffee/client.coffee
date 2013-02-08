@@ -1,5 +1,5 @@
 $(document).ready ->
-
+  
   cardTemplate = _.template $('#card-small-template').html()
 
   socket = io.connect('http://app.planning.tunk.io', { port: 3000 })
@@ -13,28 +13,6 @@ $(document).ready ->
 
   socket.on 'scale', (scale) -> $('#card-selection').html cardTemplate { scale: scale }
 
-  $('#card').on 'click', ->
-    $(@).toggleClass('ready').trigger 'cardReady'
-
-  $('#card').on 'cardReady', ->
-    if $(@).hasClass('ready')
-      return socket.emit 'ready', $('.value', this).text()
-
-    socket.emit 'cancel'
-
-  $('#card-selection').on 'click', '.card-small', ->
-    $(@).siblings('.selected').removeClass 'selected'
-
-    $('#card .value').html $(@).data 'value'
-    $(@).toggleClass 'selected'
-
-    if $(@).hasClass('selected')
-      $('#card').addClass 'ready'
-    else
-      $('#card').removeClass 'ready'
-
-    $('#card').trigger 'cardReady'
-
   socket.on 'ready', (cards) ->
     $results = $('.results').last().clone()
 
@@ -45,3 +23,12 @@ $(document).ready ->
       $('.cards', $results).append(card)
 
     $('#results').prepend($results.fadeIn())
+
+  $('#card-selection').on 'click', '.card', ->
+    $(@).siblings('.selected').removeClass 'selected'
+    $(@).toggleClass 'selected'
+    $('#card .value').html $(@).data 'value'
+
+    if $(@).hasClass 'selected'
+      return socket.emit 'ready', $('.value', @).text()
+    socket.emit 'cancel'
