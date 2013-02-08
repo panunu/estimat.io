@@ -8,7 +8,6 @@ server.listen 3000
 app.get '/', (request, response) ->
   response.sendfile __dirname + '/views/index.html'
 
-
 people = []
 cards  = []
 scale = [0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, '?']
