@@ -25,7 +25,14 @@ io.sockets.on 'connection', (socket) ->
 
     if cards.length == people.length
       values = cards.map (x) -> x.card
-      io.sockets.emit 'ready', { 'values': values, 'avg': values / values.length, 'min': _.min(values), 'max': _.max(values) }
+                           
+      io.sockets.emit 'ready', {
+        'values': values,
+        'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
+        'min': _.min(values),
+        'max': _.max(values)
+      }
+
       cards = []
 
   socket.on 'cancel', ->
