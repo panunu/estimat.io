@@ -14,4 +14,10 @@ $(document).ready ->
 
     socket.emit 'cancel'
 
-  socket.on 'ready', (cards) -> alert cards.values
+  socket.on 'ready', (cards) ->
+    $results = $('.results').first().clone()
+
+    for value in ['avg', 'min', 'max']
+      $('.' + value, $results).text(cards[value])
+
+    $('#results').prepend($results.fadeIn())
