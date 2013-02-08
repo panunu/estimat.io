@@ -22,8 +22,10 @@
         <div class="span6">
             <div id="card">
                 <div class="card-content">
-                    <span class="value"></span>
-                    <div class="extra">Say something. Lus?</div>
+                    <span class="value">
+                        <img src="img/fraktio-logo.svg" alt="Fraktio" />
+                    </span>
+                    <div class="extra">Ensiluokkaisia verkkopalveluita.</div>
                 </div>
             </div>
         </div>
@@ -71,13 +73,11 @@
 </div>
 
 <script type="text/template" id="card-small-template">
-    <% _.each(scale, function(value) { %>
-        <div class="card" data-value="<%= value %>">
-            <div class="card-content">
-                <span class="value"><%= value %></span>
-            </div>
+    <div class="card" data-value="<%= value %>">
+        <div class="card-content">
+            <span class="value"><%= value %></span>
         </div>
-    <% }); %>
+    </div>
 </script>
 
 </body>

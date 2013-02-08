@@ -1,7 +1,5 @@
 $(document).ready ->
 
-  cardTemplate = _.template $('#card-small-template').html()
-
   socket = io.connect 'http://app.planning.tunk.io', { port: 3000 }
 
   # Connect / disconnect
@@ -13,7 +11,9 @@ $(document).ready ->
       $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
 
   # Initial scale
-  socket.on 'scale', (scale) -> $('#card-selection').html cardTemplate { scale: scale }
+  socket.on 'scale', (scale) ->
+    card = _.template $('#card-small-template').html()
+    $('#card-selection').html scale.map (value) -> card { value : value }
 
   # Round is over
   socket.on 'ready', (cards) ->
@@ -35,4 +35,5 @@ $(document).ready ->
 
     if $(@).hasClass 'selected'
       return socket.emit 'ready', $('.value', @).text()
+    $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
     socket.emit 'cancel'
