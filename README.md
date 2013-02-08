@@ -1,6 +1,6 @@
 # Installation
 
-```npm install socket.io express```
+```npm install```
 
 Check out ```nginx``` for proxy configuration.
 
