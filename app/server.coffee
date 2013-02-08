@@ -10,10 +10,12 @@ app.get '/', (request, response) ->
 
 people = []
 cards  = []
+scale = [0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, '?']
 
 io.sockets.on 'connection', (socket) ->
   people.push socket.id
   io.sockets.emit 'people', people.length
+  io.sockets.emit 'scale', scale
 
   socket.on 'disconnect', ->
     people = people.filter (x) -> x != socket.id
@@ -25,7 +27,7 @@ io.sockets.on 'connection', (socket) ->
 
     if cards.length == people.length
       values = cards.map (x) -> x.card
-                           
+
       io.sockets.emit 'ready', {
         'values': values,
         'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
