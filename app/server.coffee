@@ -1,6 +1,7 @@
 app    = require('express')()
 server = require('http').createServer(app)
 io     = require('socket.io').listen(server)
+_      = require('underscore')
 
 server.listen 3000
 
@@ -23,7 +24,8 @@ io.sockets.on 'connection', (socket) ->
     cards.push { 'id': socket.id, 'card': card }
 
     if cards.length == people.length
-      io.sockets.emit 'ready', cards.map (x) -> x.card
+      values = cards.map (x) -> x.card
+      io.sockets.emit 'ready', { 'values': values, 'avg': values / values.length, 'min': _.min(values), 'max': _.max(values) }
       cards = []
 
   socket.on 'cancel', ->

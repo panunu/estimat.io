@@ -14,4 +14,4 @@ $(document).ready ->
 
     socket.emit 'cancel'
 
-  socket.on 'ready', (cards) -> alert cards
+  socket.on 'ready', (cards) -> alert cards.values
