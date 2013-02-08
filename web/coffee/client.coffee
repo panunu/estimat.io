@@ -24,8 +24,17 @@ $(document).ready ->
     socket.emit 'cancel'
 
   $('#card-selection').on 'click', '.card-small', ->
+    $(@).siblings('.selected').removeClass 'selected'
+
     $('#card .value').html $(@).data 'value'
-    $('#card').addClass('ready').trigger 'cardReady'
+    $(@).toggleClass 'selected'
+
+    if $(@).hasClass('selected')
+      $('#card').addClass 'ready'
+    else
+      $('#card').removeClass 'ready'
+
+    $('#card').trigger 'cardReady'
 
   socket.on 'ready', (cards) ->
     $results = $('.results').last().clone()
