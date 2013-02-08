@@ -27,4 +27,13 @@ $(document).ready ->
     $('#card .value').html $(@).data 'value'
     $('#card').addClass('ready').trigger 'cardReady'
 
-  socket.on 'ready', (cards) -> alert cards
+  socket.on 'ready', (cards) ->
+    $results = $('.results').last().clone()
+
+    for value in ['avg', 'min', 'max']
+      $('.' + value, $results).text(cards[value])
+
+    for card in [cards.values]
+      $('.cards', $results).append(card)
+
+    $('#results').prepend($results.fadeIn())
