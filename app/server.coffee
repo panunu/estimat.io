@@ -21,6 +21,7 @@ io.sockets.on 'connection', (socket) ->
     io.sockets.emit 'people', people.length
 
   socket.on 'ready', (card) ->
+    cards = cards.filter (x) -> x.id != socket.id
     cards.push { 'id': socket.id, 'card': card }
 
     if cards.length == people.length
