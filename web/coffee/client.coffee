@@ -12,8 +12,8 @@ $(document).ready ->
 
   # Initial scale
   socket.on 'scale', (scale) ->
-    card = _.template $('#card-small-template').html()
-    $('#card-selection').html scale.map (value) -> card { value : value }
+    template = _.template $('#card-template').html()
+    $('#card-selection').html scale.map (value) -> template { value : value }
 
   # Round is over
   socket.on 'ready', (cards) ->
@@ -22,8 +22,8 @@ $(document).ready ->
     for value in ['avg', 'min', 'max']
       $('.' + value, $results).text(cards[value])
 
-    for card in [cards.values]
-      $('.cards', $results).append(card)
+    for card in cards.values
+      $('.cards', $results).append('<div class="card">' + card + '</div>')
 
     $('#results').prepend($results.fadeIn())
 
@@ -35,5 +35,6 @@ $(document).ready ->
 
     if $(@).hasClass 'selected'
       return socket.emit 'ready', $('.value', @).text()
+
     $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
     socket.emit 'cancel'

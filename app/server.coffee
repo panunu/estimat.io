@@ -26,17 +26,16 @@ io.sockets.on 'connection', (socket) ->
     cards = cards.filter (x) -> x.id != socket.id
     cards.push { 'id': socket.id, 'card': card }
 
-    if cards.length is not people.length then return
+    if cards.length is people.length
+      values = _.sortBy((cards.map (x) -> x.card), (x) -> x)
+      cards = []
 
-    values = cards.map (x) -> x.card
-    cards = []
-
-    io.sockets.emit 'ready', {
-      'values': values,
-      'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
-      'min': _.min(values),
-      'max': _.max(values)
-    }
+      io.sockets.emit 'ready', {
+        'values': values,
+        'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
+        'min': _.min(values),
+        'max': _.max(values)
+      }
 
   socket.on 'cancel', ->
     cards = cards.filter (x) -> x.id != socket.id
