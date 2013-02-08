@@ -11,8 +11,7 @@ $(document).ready ->
     while count-- > 0
       $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
 
-  socket.on 'scale', (scale) ->
-    $('#card-selection').html scale.map (value) -> cardTemplate { value : value }
+  socket.on 'scale', (scale) -> $('#card-selection').html cardTemplate { scale: scale }
 
   $('#card').on 'click', ->
     $(@).toggleClass('ready').trigger 'cardReady'

@@ -26,31 +26,15 @@
                     <div class="extra">Say something. Lus?</div>
                 </div>
             </div>
-            <div id="card-selection"></div>
         </div>
 
         <div id="info" class="span6">
             <div class="row-fluid">
-                <div class="span4">
-                    Average
-                    <div class="data">1337</div>
-                </div>
-
-                <div class="span4">
-                    Minimum
-                    <div class="data">1</div>
-                </div>
-
-                <div class="span4">
-                    Maximum
-                    <div class="data">9000</div>
-                </div>
+                <div id="card-selection"></div>
             </div>
 
             <div class="row-fluid add-top">
                 <div class="span12">
-                    Participants
-
                     <div id="people" class="data"></div>
                 </div>
             </div>
@@ -61,9 +45,7 @@
         <div class="results row-fluid" style="display: none;">
             <div class="span6">
                 Cards
-                <div class="data cards">
-
-                </div>
+                <div class="data cards"></div>
             </div>
 
             <div class="span6">
@@ -89,11 +71,13 @@
 </div>
 
 <script type="text/template" id="card-small-template">
-<div class="card-small" data-value="<%= value %>">
-    <div class="card-content">
-        <span class="value"><%= value %></span>
-    </div>
-</div>
+    <% _.each(scale, function(value) { %>
+        <div class="card-small" data-value="<%= value %>">
+            <div class="card-content">
+                <span class="value"><%= value %></span>
+            </div>
+        </div>
+    <% }); %>
 </script>
 
 </body>
