@@ -19,41 +19,28 @@
 
 <div class="container-fluid">
     <div class="row-fluid">
-        <div class="span6">
+        <div class="span6 hide-on-mobile">
             <div id="card">
                 <div class="card-content">
-                    <span class="value"></span>
-                    <div class="extra">Say something. Lus?</div>
+                    <span class="value">
+                        <img src="img/fraktio-logo.svg" alt="Fraktio" />
+                    </span>
+                    <div class="extra">Ensiluokkaisia verkkopalveluita.</div>
                 </div>
             </div>
-            <div id="card-selection"></div>
+
+            <div id="people" class="data"></div>
         </div>
 
         <div id="info" class="span6">
             <div class="row-fluid">
-                <div class="span4">
-                    Average
-                    <div class="data">1337</div>
-                </div>
-
-                <div class="span4">
-                    Minimum
-                    <div class="data">1</div>
-                </div>
-
-                <div class="span4">
-                    Maximum
-                    <div class="data">9000</div>
-                </div>
+                <div id="card-selection"></div>
             </div>
+        </div>
+    </div>
 
-            <div class="row-fluid add-top">
-                <div class="span12">
-                    Participants
-
-                    <div id="people" class="data"></div>
-                </div>
-            </div>
+    <div class="row-fluid">
+        <div class="span6">
         </div>
     </div>
 
@@ -61,9 +48,7 @@
         <div class="results row-fluid" style="display: none;">
             <div class="span6">
                 Cards
-                <div class="data cards">
-
-                </div>
+                <div class="data cards"></div>
             </div>
 
             <div class="span6">
@@ -88,12 +73,12 @@
     </div>
 </div>
 
-<script type="text/template" id="card-small-template">
-<div class="card-small" data-value="<%= value %>">
-    <div class="card-content">
-        <span class="value"><%= value %></span>
+<script type="text/template" id="card-template">
+    <div class="card" data-value="<%= value %>">
+        <div class="card-content">
+            <span class="value"><%= value %></span>
+        </div>
     </div>
-</div>
 </script>
 
 </body>
