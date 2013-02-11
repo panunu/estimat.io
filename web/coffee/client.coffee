@@ -1,9 +1,8 @@
 $(document).ready ->
 
-  cardTemplate = _.template $('#card-small-template').html()
+  socket = io.connect 'http://app.planning.tunk.io', { port: 3000 }
 
-  socket = io.connect('http://app.planning.tunk.io', { port: 3000 })
-
+  # Connect / disconnect
   socket.on 'people', (count) ->
     if $('#people .icon-user').size() == count then return
     $('#people .icon-user').remove()
@@ -11,38 +10,31 @@ $(document).ready ->
     while count-- > 0
       $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
 
+  # Initial scale
   socket.on 'scale', (scale) ->
-    $('#card-selection').html scale.map (value) -> cardTemplate { value : value }
+    template = _.template $('#card-template').html()
+    $('#card-selection').html scale.map (value) -> template { value : value }
 
-  $('#card').on 'click', ->
-    $(@).toggleClass('ready').trigger 'cardReady'
-
-  $('#card').on 'cardReady', ->
-    if $(@).hasClass('ready')
-      return socket.emit 'ready', $('.value', this).text()
-
-    socket.emit 'cancel'
-
-  $('#card-selection').on 'click', '.card-small', ->
-    $(@).siblings('.selected').removeClass 'selected'
-
-    $('#card .value').html $(@).data 'value'
-    $(@).toggleClass 'selected'
-
-    if $(@).hasClass('selected')
-      $('#card').addClass 'ready'
-    else
-      $('#card').removeClass 'ready'
-
-    $('#card').trigger 'cardReady'
-
+  # Round is over
   socket.on 'ready', (cards) ->
     $results = $('.results').last().clone()
 
     for value in ['avg', 'min', 'max']
       $('.' + value, $results).text(cards[value])
 
-    for card in [cards.values]
-      $('.cards', $results).append(card)
+    for card in cards.values
+      $('.cards', $results).append('<div class="card">' + card + '</div>')
 
     $('#results').prepend($results.fadeIn())
+
+  # Select a card
+  $('#card-selection').on 'click', '.card', ->
+    $(@).siblings('.selected').removeClass 'selected'
+    $(@).toggleClass 'selected'
+    $('#card .value').html $(@).data 'value'
+
+    if $(@).hasClass 'selected'
+      return socket.emit 'ready', $('.value', @).text()
+
+    $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
+    socket.emit 'cancel'

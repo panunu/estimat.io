@@ -10,7 +10,7 @@ app.get '/', (request, response) ->
 
 people = []
 cards  = []
-scale = [0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, '?']
+scale  = [0, 0.5, 1, 2, 3, 5, 8, 13, 20, 40, 100, '?']
 
 io.sockets.on 'connection', (socket) ->
   people.push socket.id
@@ -26,8 +26,9 @@ io.sockets.on 'connection', (socket) ->
     cards = cards.filter (x) -> x.id != socket.id
     cards.push { 'id': socket.id, 'card': card }
 
-    if cards.length == people.length
-      values = cards.map (x) -> x.card
+    if cards.length is people.length
+      values = _.sortBy((cards.map (x) -> x.card), (x) -> x)
+      cards = []
 
       io.sockets.emit 'ready', {
         'values': values,
@@ -35,8 +36,6 @@ io.sockets.on 'connection', (socket) ->
         'min': _.min(values),
         'max': _.max(values)
       }
-
-      cards = []
 
   socket.on 'cancel', ->
     cards = cards.filter (x) -> x.id != socket.id
