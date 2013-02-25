@@ -26,6 +26,7 @@ $(document).ready ->
       $('.cards', $results).append('<div class="card">' + card + '</div>')
 
     $('#results').prepend($results.fadeIn())
+    $('body').scrollTo('#results', 500, { offset: -100 })
 
   # Select a card
   $('#card-selection').on 'click', '.card', ->
