@@ -1,21 +1,32 @@
-$(document).ready ->
+#$(document).ready ->
+app = exports ? this
 
+app.CardCtrl = ($scope) ->
   socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 }
+
+  $scope.scale  = []
+  $scope.people = 0
 
   # Connect / disconnect
   socket.on 'people', (count) ->
-    if $('#people .icon-user').size() == count then return
-    $('#people .icon-user').remove()
-
-    while count-- > 0
-      $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
+    $scope.people = count
 
   # Initial scale
   socket.on 'scale', (scale) ->
-    template = _.template $('#card-template').html()
-    $('#card-selection').html scale.map (value) -> template { value : value }
+    $scope.scale = scale
+    ok()
 
-  # Round is over
+  ok = () -> $scope.$digest()
+
+    #if $('#people .icon-user').size() == count then return
+    #$('#people .icon-user').remove()
+
+    #while count-- > 0
+    #  $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
+
+
+
+  ### Round is over
   socket.on 'ready', (cards) ->
     $results = $('.results').last().clone()
 
@@ -38,4 +49,4 @@ $(document).ready ->
       return socket.emit 'ready', $('.value', @).text()
 
     $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
-    socket.emit 'cancel'
+    socket.emit 'cancel'###
