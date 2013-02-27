@@ -9,24 +9,17 @@ app.CardCtrl = ($scope) ->
 
   # Connect / disconnect
   socket.on 'people', (count) ->
-    $scope.people = count
+    $scope.people = [ 1..count ]
+    refresh()
 
   # Initial scale
   socket.on 'scale', (scale) ->
     $scope.scale = scale
-    ok()
+    refresh()
 
-  ok = () -> $scope.$digest()
+  refresh = () -> $scope.$digest()
 
-    #if $('#people .icon-user').size() == count then return
-    #$('#people .icon-user').remove()
-
-    #while count-- > 0
-    #  $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
-
-
-
-  ### Round is over
+  # Round is over
   socket.on 'ready', (cards) ->
     $results = $('.results').last().clone()
 
