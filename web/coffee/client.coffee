@@ -20,11 +20,11 @@ app.CardCtrl = ($scope) ->
 
   # Round is over
   socket.on 'ready', (cards) ->
-    $scope.results.push cards
+    $scope.results.push cards # TODO: Reverse with a ng-directive
     refresh()
     $('body').scrollTo('#results', 500, { offset: -100 })
 
-  refresh = -> $scope.$apply() # There has to be a better way. $watch?
+  refresh = -> $scope.$apply() # TODO: There has to be a better way. $watch?
 
   # TODO: Angularify
   # Select a card
