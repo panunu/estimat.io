@@ -4,8 +4,9 @@ app = exports ? this
 app.CardCtrl = ($scope) ->
   socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 }
 
-  $scope.scale  = []
-  $scope.people = 0
+  $scope.scale   = []
+  $scope.people  = 0
+  $scope.results = []
 
   # Connect / disconnect
   socket.on 'people', (count) ->
@@ -17,20 +18,12 @@ app.CardCtrl = ($scope) ->
     $scope.scale = scale
     refresh()
 
-  refresh = () -> $scope.$digest()
-
   # Round is over
   socket.on 'ready', (cards) ->
-    $results = $('.results').last().clone()
+    $scope.results.push cards
+    refresh()
 
-    for value in ['avg', 'min', 'max']
-      $('.' + value, $results).text(cards[value])
-
-    for card in cards.values
-      $('.cards', $results).append('<div class="card">' + card + '</div>')
-
-    $('#results').prepend($results.fadeIn())
-    $('body').scrollTo('#results', 500, { offset: -100 })
+  refresh = -> $scope.$digest() # There has to be a better way. $watch?
 
   # Select a card
   $('#card-selection').on 'click', '.card', ->
@@ -42,4 +35,4 @@ app.CardCtrl = ($scope) ->
       return socket.emit 'ready', $('.value', @).text()
 
     $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
-    socket.emit 'cancel'###
+    socket.emit 'cancel'

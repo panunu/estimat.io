@@ -22,7 +22,7 @@ io.sockets.on 'connection', (socket) ->
       cards.push { 'id': socket.id, 'card': card }
 
     if cards.length is people.length
-      all    = _.sortBy((cards.map (x) -> x.card), (x) -> x)
+      all    = cards.map (x) -> x.card
       values = all.filter (x) -> x != '?'
       cards  = []
 
