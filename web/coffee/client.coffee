@@ -22,8 +22,9 @@ app.CardCtrl = ($scope) ->
   socket.on 'ready', (cards) ->
     $scope.results.push cards
     refresh()
+    $('body').scrollTo('#results', 500, { offset: -100 })
 
-  refresh = -> $scope.$digest() # There has to be a better way. $watch?
+  refresh = -> $scope.$apply() # There has to be a better way. $watch?
 
   # TODO: Angularify
   # Select a card
