@@ -25,6 +25,7 @@ app.CardCtrl = ($scope) ->
 
   refresh = -> $scope.$digest() # There has to be a better way. $watch?
 
+  # TODO: Angularify
   # Select a card
   $('#card-selection').on 'click', '.card', ->
     $(@).siblings('.selected').removeClass 'selected'
