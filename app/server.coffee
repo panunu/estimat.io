@@ -1,12 +1,5 @@
-app    = require('express')()
-server = require('http').createServer(app)
-io     = require('socket.io').listen(server)
-_      = require('underscore')
-
-server.listen 3000
-
-app.get '/', (request, response) ->
-  response.sendfile __dirname + '/views/index.html'
+io = require('socket.io').listen(3000)
+_  = require('underscore')
 
 people = []
 cards  = []

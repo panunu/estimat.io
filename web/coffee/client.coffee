@@ -1,6 +1,6 @@
 $(document).ready ->
 
-  socket = io.connect 'http://app.planning.tunk.io', { port: 3000 }
+  socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 }
 
   # Connect / disconnect
   socket.on 'people', (count) ->
