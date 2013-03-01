@@ -2,7 +2,7 @@
 app = exports ? this
 
 app.CardCtrl = ($scope) ->
-  socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 }
+  socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 } # TODO: Configure?
 
   $scope.scale   = []
   $scope.people  = 0
