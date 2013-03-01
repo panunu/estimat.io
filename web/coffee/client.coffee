@@ -1,4 +1,3 @@
-#$(document).ready ->
 app = exports ? this
 
 app.CardCtrl = ($scope) ->
