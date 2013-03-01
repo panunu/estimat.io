@@ -3,9 +3,12 @@ app = exports ? this
 app.CardCtrl = ($scope) ->
   socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 } # TODO: Configure?
 
-  $scope.scale   = []
-  $scope.people  = 0
-  $scope.results = []
+  logo = '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
+
+  $scope.scale    = []
+  $scope.people   = 0
+  $scope.results  = []
+  $scope.selected = logo
 
   # Connect / disconnect
   socket.on 'people', (count) ->
@@ -23,17 +26,14 @@ app.CardCtrl = ($scope) ->
     refresh()
     $('body').scrollTo('#results', 500, { offset: -100 })
 
+  # Select a card
+  $scope.select = (card) ->
+    if $scope.selected is card
+      $scope.selected = logo
+      return socket.emit 'cancel'
+
+    $scope.selected = card
+    socket.emit 'ready', card
+
   refresh = -> $scope.$apply() # TODO: There has to be a better way. $watch?
 
-  # TODO: Angularify
-  # Select a card
-  $('#card-selection').on 'click', '.card', ->
-    $(@).siblings('.selected').removeClass 'selected'
-    $(@).toggleClass 'selected'
-    $('#card .value').html $(@).data 'value'
-
-    if $(@).hasClass 'selected'
-      return socket.emit 'ready', $('.value', @).text()
-
-    $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
-    socket.emit 'cancel'

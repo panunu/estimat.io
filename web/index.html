@@ -26,9 +26,7 @@
         <div class="span6 hidden-phone">
             <div id="card">
                 <div class="card-content">
-                    <span class="value">
-                        <img src="img/fraktio-logo.svg" alt="Fraktio" />
-                    </span>
+                    <span class="value" ng-bind-html-unsafe="selected"></span>
                     <div class="extra">Ensiluokkaisia verkkopalveluita.</div>
                 </div>
             </div>
@@ -43,7 +41,7 @@
         <div id="info" class="span6">
             <div class="row-fluid">
                 <div id="card-selection">
-                    <div ng-repeat="card in scale" class="card" data-value="{{ card }}">
+                    <div ng-repeat="card in scale" class="card" data-value="{{ card }}" ng-click="select(card)" ng-class="{ selected: selected == card }">
                         <div class="card-content">
                             <span class="value">{{ card }}</span>
                         </div>
