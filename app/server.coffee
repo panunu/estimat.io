@@ -24,7 +24,7 @@ io.sockets.on 'connection', (socket) ->
     if cards.length is people.length
       all    = cards.map (x) -> x.card
       values = all.filter (x) -> x != '?'
-      values = if values.length then values else [0]
+      values = if values.length > 0 then values else [0]
       cards  = []
 
       io.sockets.emit 'ready', {

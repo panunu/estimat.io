@@ -20,7 +20,7 @@ app.CardCtrl = ($scope) ->
 
   # Round is over
   socket.on 'ready', (cards) ->
-    $scope.results.push cards # TODO: Reverse with a ng-directive
+    $scope.results.unshift cards
     refresh()
     $('body').scrollTo('#results', 500, { offset: -100 })
 
