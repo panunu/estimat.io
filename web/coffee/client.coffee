@@ -1,40 +1,39 @@
-$(document).ready ->
+app = exports ? this
 
-  socket = io.connect 'http://app.planning.tunk.io', { port: 3000 }
+app.CardCtrl = ($scope) ->
+  socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 } # TODO: Configure?
+
+  logo = '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
+
+  $scope.scale    = []
+  $scope.people   = 0
+  $scope.results  = []
+  $scope.selected = logo
 
   # Connect / disconnect
   socket.on 'people', (count) ->
-    if $('#people .icon-user').size() == count then return
-    $('#people .icon-user').remove()
-
-    while count-- > 0
-      $('#people').append('<i class="icon-user"></i> ').hide().fadeIn()
+    $scope.people = [ 1..count ]
+    refresh()
 
   # Initial scale
   socket.on 'scale', (scale) ->
-    template = _.template $('#card-template').html()
-    $('#card-selection').html scale.map (value) -> template { value : value }
+    $scope.scale = scale
+    refresh()
 
   # Round is over
   socket.on 'ready', (cards) ->
-    $results = $('.results').last().clone()
-
-    for value in ['avg', 'min', 'max']
-      $('.' + value, $results).text(cards[value])
-
-    for card in cards.values
-      $('.cards', $results).append('<div class="card">' + card + '</div>')
-
-    $('#results').prepend($results.fadeIn())
+    $scope.results.unshift cards
+    refresh()
+    $('body').scrollTo('#results', 500, { offset: -100 })
 
   # Select a card
-  $('#card-selection').on 'click', '.card', ->
-    $(@).siblings('.selected').removeClass 'selected'
-    $(@).toggleClass 'selected'
-    $('#card .value').html $(@).data 'value'
+  $scope.select = (card) ->
+    if $scope.selected is card
+      $scope.selected = logo
+      return socket.emit 'cancel'
 
-    if $(@).hasClass 'selected'
-      return socket.emit 'ready', $('.value', @).text()
+    $scope.selected = card
+    socket.emit 'ready', card
 
-    $('#card .value').html '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
-    socket.emit 'cancel'
+  refresh = -> $scope.$apply() # TODO: There has to be a better way. $watch?
+
