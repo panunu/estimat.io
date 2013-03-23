@@ -1,14 +1,13 @@
 module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-imagemin');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-coffee');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sed');
-    grunt.loadNpmTasks('grunt-contrib-concat');
 
-    // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
@@ -52,11 +51,19 @@ module.exports = function(grunt) {
                 src: [ 'components/**/**.min.js' ],
                 dest: 'web/assets/js/libraries.js'
             }
+        },
+
+        coffee: {
+            compile: {
+                files: {
+                    'web/assets/js/client.js': 'client/client.coffee'
+                }
+            }
         }
 
     });
 
-    grunt.registerTask('default', [ 'copy:main', 'concat:main' ]);
+    grunt.registerTask('default', [ 'copy:main', 'concat:main', 'coffee:compile' ]);
 
 };
 
