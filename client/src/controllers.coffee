@@ -1,6 +1,6 @@
-app = exports ? this
+'use strict'
 
-app.CardCtrl = ($scope) ->
+angular.module('estimatio').CardCtrl = ($scope) ->
   socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 } # TODO: Configure?
 
   logo = '<img src="img/fraktio-logo.svg" alt="Fraktio" />'

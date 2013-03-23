@@ -56,7 +56,8 @@ module.exports = function(grunt) {
         coffee: {
             compile: {
                 files: {
-                    'web/assets/js/client.js': 'client/client.coffee'
+                    'web/assets/js/controllers.js': 'client/src/controllers.coffee',
+                    'web/assets/js/app.js': 'client/src/app.coffee'
                 }
             }
         }
