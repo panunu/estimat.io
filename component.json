@@ -1,0 +1,10 @@
+{
+    "name": "estimat.io",
+    "version": "0.0.1",
+    "dependencies": {
+        "jquery": "~1.9.1",
+        "angular": "~1.0.5",
+        "angular-resource": "~1.0.5",
+        "angular-sanitize": "~1.0.5"
+    }
+}
