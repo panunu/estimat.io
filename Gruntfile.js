@@ -38,17 +38,25 @@ module.exports = function(grunt) {
             }
         },
 
+        copy: {
+            main: {
+                files: [
+                    { expand: true, src: [ 'client/*.html' ], flatten: true, dest: 'web/' }
+                ]
+            }
+        },
+
         concat: {
             options: {},
-            dev: {
-                src: ['components/**/**.min.js' ],
-                dest: 'web/assets/libraries.js'
+            main: {
+                src: [ 'components/**/**.min.js' ],
+                dest: 'web/assets/js/libraries.js'
             }
         }
 
     });
 
-    grunt.registerTask('default', [ 'concat:dev' ]);
+    grunt.registerTask('default', [ 'copy:main', 'concat:main' ]);
 
 };
 
