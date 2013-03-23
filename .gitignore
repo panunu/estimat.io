@@ -4,3 +4,6 @@ node_modules
 
 app/*.js
 web/js/client.js
+
+components/*
+web/assets/*
