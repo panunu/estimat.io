@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         concat: {
             options: {},
             dev: {
-                src: ['components/**.min.js' ],
+                src: ['components/**/**.min.js' ],
                 dest: 'web/assets/libraries.js'
             }
         }
