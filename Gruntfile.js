@@ -40,7 +40,8 @@ module.exports = function(grunt) {
         copy: {
             main: {
                 files: [
-                    { expand: true, src: [ 'client/*.html' ], flatten: true, dest: 'web/' }
+                    { expand: true, src: [ 'client/*.html' ], flatten: true, dest: 'web/' },
+                    { expand: true, src: [ 'components/**/**.min.js' ], flatten: true, dest: 'web/assets/js/' }
                 ]
             }
         },
@@ -64,7 +65,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('default', [ 'copy:main', 'concat:main', 'coffee:compile' ]);
+    grunt.registerTask('default', [ 'copy:main', 'coffee:compile' ]);
 
 };
 

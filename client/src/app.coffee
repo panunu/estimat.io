@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 angular
   .module("estimatio", [ "ngResource" ])
@@ -6,6 +6,6 @@ angular
     $routeProvider
       .when("/",
         templateUrl: "views/main.html"
-        controller: "MainCtrl"
+        controller: "CardCtrl"
       )
       .otherwise redirectTo: "/"

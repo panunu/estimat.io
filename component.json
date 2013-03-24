@@ -3,7 +3,6 @@
     "version": "0.0.1",
     "dependencies": {
         "socket.io-client": ">= 0.9",
-        "jquery": "~1.9.1",
         "jquery.scrollTo": ">= 1.4.3",
         "angular": "~1.0.5",
         "angular-resource": "~1.0.5",
