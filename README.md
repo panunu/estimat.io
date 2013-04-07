@@ -2,7 +2,7 @@
 
 ```npm install```
 
-Check out ```nginx``` for proxy configuration.
+Check out ```nginx``` for simple configuration.
 
 ## The following makes your life easier
 
