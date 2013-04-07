@@ -14,13 +14,11 @@ window.CardCtrl = ($scope, $routeParams) ->
 
   # When people connect / disconnect
   socket.on 'people', (room) ->
-    $scope.room = room
-    refresh()
+    refresh(room)
 
   # Round is over
   socket.on 'ready', (room) ->
-    $scope.room = room
-    refresh()
+    refresh(room)
     $('body').scrollTo('#results', 500, { offset: -100 })
 
   # Select a card
@@ -32,5 +30,7 @@ window.CardCtrl = ($scope, $routeParams) ->
     $scope.selected = card
     socket.emit 'ready', card
 
-  refresh = -> $scope.$apply() # TODO: There has to be a better way. $watch?
+  refresh = (room) ->
+    $scope.room = room
+    $scope.$apply() # TODO: There has to be a better way. $watch?
 
