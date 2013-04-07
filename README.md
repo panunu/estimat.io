@@ -8,10 +8,20 @@ Check out ```nginx``` for proxy configuration.
 
 ```npm install coffee supervisor -g```
 
+# Development
+
+## Server-side files
+
 Run these on project root.
 
 ```coffee -w -c app/server.coffee```
 
-```coffee -w -c -o web/js web/coffee/client.coffee```
-
 ```supervisor app/server.js```
+
+## Client-side files
+
+Just ```grunt```.
+
+# Other
+
+Requires socket.io `0.9`.
