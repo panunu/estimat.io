@@ -4,8 +4,8 @@ angular
   .module("estimatio", [ "ngResource" ])
   .config ($routeProvider) ->
     $routeProvider
-      .when("/",
-        templateUrl: "views/cards.html"
+      .when "/room/:id",
         controller: "CardCtrl"
-      )
-      .otherwise redirectTo: "/"
+        templateUrl: "views/cards.html"
+
+      .otherwise redirectTo: "/room/" + (Math.random() * 10).toString(32).substring(2)

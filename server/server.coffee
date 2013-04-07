@@ -6,9 +6,10 @@ cards  = []
 scale  = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?']
 
 io.sockets.on 'connection', (socket) ->
-  people.push socket.id
-  io.sockets.emit 'people', people.length
-  io.sockets.emit 'scale', scale
+  socket.on 'join', ->
+    people.push socket.id
+    io.sockets.emit 'people', people.length
+    io.sockets.emit 'scale', scale
 
   socket.on 'disconnect', ->
     people = people.filter (x) -> x != socket.id

@@ -1,6 +1,6 @@
 'use strict'
 
-window.CardCtrl = ($scope) ->
+window.CardCtrl = ($scope, $routeParams) ->
   socket = io.connect 'http://app.estimat.tunk.io', { port: 3000 } # TODO: Configure?
 
   logo = '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
@@ -9,6 +9,9 @@ window.CardCtrl = ($scope) ->
   $scope.people   = 0
   $scope.results  = []
   $scope.selected = logo
+
+  socket.on 'connect', () ->
+    socket.emit 'join', $routeParams.id
 
   # Connect / disconnect
   socket.on 'people', (count) ->
