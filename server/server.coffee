@@ -3,13 +3,18 @@ _  = require('underscore')
 
 people = []
 cards  = []
+rooms  = []
 scale  = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?']
 
 io.sockets.on 'connection', (socket) ->
-  socket.on 'join', ->
-    people.push socket.id
-    io.sockets.emit 'people', people.length
-    io.sockets.emit 'scale', scale
+  socket.on 'join', (room) ->
+    socket.join room
+
+    if people[room] is undefined then people[room] = []
+    people[room].push socket.id
+
+    io.sockets.in(room).emit 'people', people[room].length
+    io.sockets.in(room).emit 'scale', scale
 
   socket.on 'disconnect', ->
     people = people.filter (x) -> x != socket.id

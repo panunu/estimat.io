@@ -24,4 +24,4 @@ Just ```grunt```.
 
 # Other
 
-Requires socket.io `0.9`.
+Requires socket.io `0.9` (documentation https://github.com/learnboost/socket.io/tree/0.9.14).
