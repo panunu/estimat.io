@@ -5,7 +5,7 @@ angular
   .config ($routeProvider) ->
     $routeProvider
       .when("/",
-        templateUrl: "views/main.html"
+        templateUrl: "views/cards.html"
         controller: "CardCtrl"
       )
       .otherwise redirectTo: "/"

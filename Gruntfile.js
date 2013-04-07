@@ -41,6 +41,7 @@ module.exports = function(grunt) {
             main: {
                 files: [
                     { expand: true, src: [ 'client/*.html' ], flatten: true, dest: 'web/' },
+                    { expand: true, src: [ 'client/views/*.html' ], flatten: true, dest: 'web/views' },
                     { expand: true, src: [ 'components/**/**.min.js' ], flatten: true, dest: 'web/assets/js/' }
                 ]
             }
