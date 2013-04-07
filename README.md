@@ -2,16 +2,26 @@
 
 ```npm install```
 
-Check out ```nginx``` for proxy configuration.
+Check out ```nginx``` for simple configuration.
 
 ## The following makes your life easier
 
 ```npm install coffee supervisor -g```
 
+# Development
+
+## Server-side files
+
 Run these on project root.
 
 ```coffee -w -c app/server.coffee```
 
-```coffee -w -c -o web/js web/coffee/client.coffee```
-
 ```supervisor app/server.js```
+
+## Client-side files
+
+Just ```grunt```.
+
+# Other
+
+Requires socket.io `0.9` (documentation https://github.com/learnboost/socket.io/tree/0.9.14).

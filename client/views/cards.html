@@ -1,27 +1,4 @@
-<html ng-app>
-<head>
-    <title>Estimat.io - Fraktio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" rel="stylesheet">
-    <link href="less/planning.less" rel="stylesheet" type="text/less">
-    <link href="//fonts.googleapis.com/css?family=Patua+One" rel="stylesheet" type="text/css">
-
-    <script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="js/less-1.3.3.min.js"></script>
-    <script src="js/socket.io.min.js"></script>
-    <script src="js/underscore-min.js"></script>
-    <script src="js/jquery.scrollTo.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.5/angular.min.js"></script>
-
-    <script src="js/client.js"></script>
-</head>
-
-<body>
-
-<div class="container-fluid" ng-controller="CardCtrl">
+<div class="container-fluid">
     <div class="row-fluid">
         <div class="span6 hidden-phone">
             <div id="card">
@@ -32,7 +9,7 @@
             </div>
 
             <div id="people" class="data">
-                <div ng-repeat="user in people" style="display: inline;">
+                <div ng-repeat="user in room.people" style="display: inline;">
                     <i class="icon-user"></i>
                 </div>
             </div>
@@ -41,7 +18,7 @@
         <div id="info" class="span6">
             <div class="row-fluid">
                 <div id="card-selection">
-                    <div ng-repeat="card in scale" class="card" data-value="{{ card }}" ng-click="select(card)" ng-class="{ selected: selected == card }">
+                    <div ng-repeat="card in room.scale" class="card" data-value="{{ card }}" ng-click="select(card)" ng-class="{ selected: selected == card }">
                         <div class="card-content">
                             <span class="value">{{ card }}</span>
                         </div>
@@ -56,7 +33,7 @@
     </div>
 
     <div id="results">
-        <div ng-repeat="result in results" class="results row-fluid">
+        <div ng-repeat="result in room.results" class="results row-fluid">
             <div class="span6">
                 Cards
 
@@ -88,6 +65,3 @@
         </div>
     </div>
 </div>
-
-</body>
-</html>

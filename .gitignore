@@ -2,5 +2,9 @@
 .DS_Store
 node_modules
 
-app/*.js
-web/js/client.js
+server/*.js
+
+components/*
+web/assets/*
+web/views/*
+web/index.html
