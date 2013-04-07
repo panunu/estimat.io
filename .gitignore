@@ -6,4 +6,5 @@ server/*.js
 
 components/*
 web/assets/*
+web/views/*
 web/index.html
