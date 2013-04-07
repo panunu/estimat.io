@@ -5,27 +5,21 @@ window.CardCtrl = ($scope, $routeParams) ->
 
   logo = '<img src="img/fraktio-logo.svg" alt="Fraktio" />'
 
-  $scope.scale    = []
-  $scope.people   = 0
-  $scope.results  = []
+  $scope.room     = null
   $scope.selected = logo
 
+  # Join room
   socket.on 'connect', () ->
     socket.emit 'join', $routeParams.id
 
-  # Connect / disconnect
-  socket.on 'people', (count) ->
-    $scope.people = [ 1..count ]
-    refresh()
-
-  # Initial scale
-  socket.on 'scale', (scale) ->
-    $scope.scale = scale
+  # When people connect / disconnect
+  socket.on 'people', (room) ->
+    $scope.room = room
     refresh()
 
   # Round is over
-  socket.on 'ready', (cards) ->
-    $scope.results.unshift cards
+  socket.on 'ready', (room) ->
+    $scope.room = room
     refresh()
     $('body').scrollTo('#results', 500, { offset: -100 })
 

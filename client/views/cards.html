@@ -9,7 +9,7 @@
             </div>
 
             <div id="people" class="data">
-                <div ng-repeat="user in people" style="display: inline;">
+                <div ng-repeat="user in room.people" style="display: inline;">
                     <i class="icon-user"></i>
                 </div>
             </div>
@@ -18,7 +18,7 @@
         <div id="info" class="span6">
             <div class="row-fluid">
                 <div id="card-selection">
-                    <div ng-repeat="card in scale" class="card" data-value="{{ card }}" ng-click="select(card)" ng-class="{ selected: selected == card }">
+                    <div ng-repeat="card in room.scale" class="card" data-value="{{ card }}" ng-click="select(card)" ng-class="{ selected: selected == card }">
                         <div class="card-content">
                             <span class="value">{{ card }}</span>
                         </div>
@@ -33,7 +33,7 @@
     </div>
 
     <div id="results">
-        <div ng-repeat="result in results" class="results row-fluid">
+        <div ng-repeat="result in room.results" class="results row-fluid">
             <div class="span6">
                 Cards
 

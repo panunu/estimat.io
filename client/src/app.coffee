@@ -8,4 +8,4 @@ angular
         controller: "CardCtrl"
         templateUrl: "views/cards.html"
 
-      .otherwise redirectTo: "/room/" + (Math.random() * 10).toString(32).substring(2)
+      .otherwise redirectTo: "/room/" + (Math.random()).toString(32).substring(2)
