@@ -8,5 +8,12 @@ exports.RoomTest =
 
   'has name and scale': (test) ->
     test.equal @room.name, 'lus'
-    test.ok @room.scale
+    test.equal @room.scale[0], '0'
+    test.equal @room.scale[1], '1'
+    test.done()
+
+  'users can be added': (test) ->
+    @room.addUser 'socketId'
+
+    test.equal @room.users[0], 'socketId'
     test.done()
