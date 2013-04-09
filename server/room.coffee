@@ -1,4 +1,4 @@
-class Room
+module.exports = class Room
   cards: []
   users: []
   results: []
@@ -8,4 +8,3 @@ class Room
   addUser: (socketId) ->
     @users.push socketId
 
-module.exports = Room

@@ -2,18 +2,16 @@ Room = require '../room'
 
 exports.RoomTest =
 
-  setUp: (callback) ->
-    @room = new Room 'lus', ['0', '1']
-    callback()
-
   'has name and scale': (test) ->
-    test.equal @room.name, 'lus'
-    test.equal @room.scale[0], '0'
-    test.equal @room.scale[1], '1'
+    room = new Room 'lus', ['0', '1']
+
+    test.equal room.name, 'lus'
+    test.equal room.scale[0], '0'
     test.done()
 
   'users can be added': (test) ->
-    @room.addUser 'socketId'
+    room = new Room 'lus', ['0', '1']
+    room.addUser 'losofeie'
 
-    test.equal @room.users[0], 'socketId'
+    test.equal room.users[0], 'losofeie'
     test.done()
