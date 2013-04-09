@@ -1,7 +1,6 @@
 io = require('socket.io').listen(3000)
 _  = require('underscore')
 
-cards  = []
 rooms  = []
 scale  = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?']
 
