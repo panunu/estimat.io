@@ -20,10 +20,10 @@ class Room
     if _.contains(@scale, card)
       @cards.push { 'id': socket.id, 'card': card }
 
-  isRoundFinished: () =>
+  isRoundFinished: =>
     @cards.length == @users.length
 
-  calculateResults: () =>
+  calculateResults: =>
     all    = @cards.map (x) -> x.card
     values = all.filter (x) -> x != '?'
     values = if values.length > 0 then values else [0]
