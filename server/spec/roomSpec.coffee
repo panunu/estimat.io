@@ -22,3 +22,13 @@ describe 'Room', ->
 
     expect(@room.cards[0].id).toBe @socket.id
     expect(@room.cards[0].card).toBe '0'
+
+  it 'can have users removed, which also removes their card selection', ->
+    @room.addUser @socket
+    @room.selectCard '0', @socket
+
+    @room.removeUser @socket
+
+    expect(@room.users[0]).toBeUndefined()
+    expect(@room.cards[0]).toBeUndefined()
+

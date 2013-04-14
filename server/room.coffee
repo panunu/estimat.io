@@ -10,8 +10,9 @@ class Room
   addUser: (socket) ->
     @users.push socket.id
 
-  removeUser: (socketId) ->
-
+  removeUser: (socket) ->
+    @cards = @cards.filter (x) -> x.id != socket.id
+    @users = @users.filter (x) -> x != socket.id
 
   selectCard: (card, socket) ->
     @cards = @cards.filter (x) -> x.id != socket.id
