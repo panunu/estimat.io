@@ -7,7 +7,6 @@ describe 'Room', ->
   beforeEach ->
     room   = new Room 'lus', ['0', '1']
     socket = { id: 'losofeis' }
-    #console.log room
 
   it 'has a name and card scale', ->
     expect(room.name).toBe 'lus'
@@ -25,7 +24,7 @@ describe 'Room', ->
 
     expect(room.cards[0].id).toBe socket.id
     expect(room.cards[0].card).toBe '0'
-###
+
   it 'can have users removed, which also removes their card selection', ->
     room.addUser socket
     room.selectCard '0', socket
@@ -41,5 +40,5 @@ describe 'Room', ->
 
     room.selectCard '0', socket
     expect(room.isReady()).toBeTruthy()
-###
+
 
