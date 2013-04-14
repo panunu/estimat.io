@@ -3,8 +3,8 @@ _  = require('underscore')
 class Room
 
   constructor: (@name, @scale) ->
-    @cards = []
-    @users = []
+    @cards   = []
+    @users   = []
     @results = []
 
   addUser: (socket) =>
