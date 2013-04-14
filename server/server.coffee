@@ -35,16 +35,7 @@ io.sockets.on 'connection', (socket) ->
         room.cards.push { 'id': socket.id, 'card': card }
 
       if room.cards.length is room.people.length
-        all    = room.cards.map (x) -> x.card
-        values = all.filter (x) -> x != '?'
-        values = if values.length > 0 then values else [0]
-        room.cards  = []
-        room.results.unshift {
-          'values': all,
-          'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
-          'min': _.min(values),
-          'max': _.max(values)
-        }
+
 
         io.sockets.in(room.name).emit 'ready', room
 

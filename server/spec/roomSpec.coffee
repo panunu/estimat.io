@@ -1,4 +1,6 @@
+_    = require 'underscore'
 Room = require '../room'
+
 
 describe 'Room', ->
   room   = null
@@ -36,9 +38,28 @@ describe 'Room', ->
 
   it 'can determine if a round is over', ->
     room.addUser socket
-    expect(room.isReady()).toBeFalsy()
+    expect(room.isRoundFinished()).toBeFalsy()
 
     room.selectCard '0', socket
-    expect(room.isReady()).toBeTruthy()
+    expect(room.isRoundFinished()).toBeTruthy()
+
+  it 'calculates results', ->
+    room.addUser socket
+    room.addUser { id: 'lousou' }
+
+    room.selectCard '0', socket
+    room.selectCard '1', { id: 'lousou' }
+
+    room.calculateResults()
+
+    results = room.results.pop()
+    expect(results.avg).toBe 0.5
+    expect(results.min).toBe '0'
+    expect(results.max).toBe '1'
+    expect(results.values).toContain('0')
+    expect(results.values).toContain('1')
+
+
+
 
 

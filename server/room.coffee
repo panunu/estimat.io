@@ -1,4 +1,4 @@
-_  = require('underscore')
+_  = require 'underscore'
 
 class Room
 
@@ -20,7 +20,20 @@ class Room
     if _.contains(@scale, card)
       @cards.push { 'id': socket.id, 'card': card }
 
-  isReady: () =>
+  isRoundFinished: () =>
     @cards.length == @users.length
+
+  calculateResults: () =>
+    all    = @cards.map (x) -> x.card
+    values = all.filter (x) -> x != '?'
+    values = if values.length > 0 then values else [0]
+
+    @cards = []
+    @results.unshift {
+       'values': all,
+       'avg': _.reduce(values, (x, y) -> parseFloat(x) + parseFloat(y)) / values.length,
+       'min': _.min(values),
+       'max': _.max(values)
+    }
 
 module.exports = Room
