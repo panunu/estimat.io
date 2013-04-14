@@ -1,6 +1,6 @@
 _  = require('underscore')
 
-module.exports = class Room
+class Room
   cards: []
   users: []
   results: []
@@ -19,3 +19,4 @@ module.exports = class Room
     if _.contains(@scale, card)
       @cards.push { 'id': socket.id, 'card': card }
 
+module.exports = Room
