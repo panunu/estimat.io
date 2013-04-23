@@ -14,9 +14,9 @@ Check out ```nginx``` for simple configuration.
 
 Run these on project root.
 
-```coffee -w -c app/server.coffee```
+```coffee -w -c server/server.coffee```
 
-```supervisor app/server.js```
+```supervisor server/server.js```
 
 ## Client-side files
 
