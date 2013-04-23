@@ -14,9 +14,13 @@ Check out ```nginx``` for simple configuration.
 
 Run these on project root.
 
-```coffee -w -c server/server.coffee```
+```coffee -w -c server/*.coffee```
 
 ```supervisor server/server.js```
+
+## Testing
+
+```npm test```
 
 ## Client-side files
 
