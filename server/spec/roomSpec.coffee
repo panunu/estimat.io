@@ -1,7 +1,6 @@
 _    = require 'underscore'
 Room = require '../room'
 
-
 describe 'Room', ->
   room   = null
   socket = null

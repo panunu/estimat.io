@@ -1,5 +1,6 @@
-io = require('socket.io').listen(3000)
-_  = require('underscore')
+io   = require('socket.io').listen(3000)
+_    = require('underscore')
+Room = require('./room')
 
 rooms = [] # Could we utilize e.g. Redis here?
 scale = ['0', '0.5', '1', '2', '3', '5', '8', '13', '20', '40', '100', '?']
@@ -35,8 +36,6 @@ io.sockets.on 'connection', (socket) ->
         room.cards.push { 'id': socket.id, 'card': card }
 
       if room.cards.length is room.people.length
-
-
         io.sockets.in(room.name).emit 'ready', room
 
   socket.on 'cancel', ->
