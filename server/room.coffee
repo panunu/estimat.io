@@ -15,10 +15,13 @@ class Room
     @users = @users.filter (x) -> x != socket.id
 
   selectCard: (card, socket) =>
-    @cards = @cards.filter (x) -> x.id != socket.id
+    @unselectCard(socket)
 
     if _.contains(@scale, card)
       @cards.push { 'id': socket.id, 'card': card }
+
+  unselectCard: (socket) =>
+    @cards = @cards.filter (x) -> x.id != socket.id
 
   isRoundFinished: =>
     @cards.length == @users.length

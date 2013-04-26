@@ -26,6 +26,14 @@ describe 'Room', ->
     expect(room.cards[0].id).toBe socket.id
     expect(room.cards[0].card).toBe '0'
 
+  it 'can have cards unselected by users', ->
+    room.addUser socket
+    room.selectCard '0', socket
+    room.unselectCard socket
+
+    expect(room.cards).toBeDefined()
+    expect(room.cards[0]).toBeUndefined()
+
   it 'can have users removed, which also removes their card selection', ->
     room.addUser socket
     room.selectCard '0', socket
